@@ -35,10 +35,10 @@ BEGIN TRY
 
 	INSERT INTO [dbo].[Student] ([StudentCard], [FirstName], [LastName], [Middlename], [Birthday], [BirthPlace], [Address], [SexId], [CivilStatusId], [Room], [CreatedBy], [CreatedDateTime]) 
 	VALUES 
-		(N'KC №12029583', N'Іщук', N'Олена', N'Сергіївна', '20050305 00:00:00 AM', N'м. Київ', N'вул. Хрещатик, буд. 1, кв. 45', @FemaleId, @MarriedId, 22, @CurrentUserId, GETDATE()),
-		(N'BC №12067704', N'Тороканець', N'Неля', N'Олександрівна', '20060618 00:00:00 AM', N'м. Львів', N'вул. Городоцька, буд. 72', @FemaleId, @MarriedId, 22, @CurrentUserId, GETDATE()),
-		(N'KB №11761526', N'Браїлко', N'Марія', N'Ігорівна', '20070912 00:00:00 AM', N'м. Львів', N'вул. Шевченка, буд. 30, кв. 10', @FemaleId, @SingleId, 23, @CurrentUserId, GETDATE()),
-		(N'PB №13349080', N'Красицький', N'Олександр', N'Геннадійович', '20070621 00:00:00 AM', N'м. Рівне', N'вул. Соборна, буд. 250, кв 42', @MaleId, @SingleId, 24, @CurrentUserId, GETDATE())
+		(N'KC в„–12029583', N'Р†С‰СѓРє', N'РћР»РµРЅР°', N'РЎРµСЂРіС–С—РІРЅР°', '20050305 00:00:00 AM', N'Рј. РљРёС—РІ', N'РІСѓР». РҐСЂРµС‰Р°С‚РёРє, Р±СѓРґ. 1, РєРІ. 45', @FemaleId, @MarriedId, 22, @CurrentUserId, GETDATE()),
+		(N'BC в„–12067704', N'РўРѕСЂРѕРєР°РЅРµС†СЊ', N'РќРµР»СЏ', N'РћР»РµРєСЃР°РЅРґСЂС–РІРЅР°', '20060618 00:00:00 AM', N'Рј. Р›СЊРІС–РІ', N'РІСѓР». Р“РѕСЂРѕРґРѕС†СЊРєР°, Р±СѓРґ. 72', @FemaleId, @MarriedId, 22, @CurrentUserId, GETDATE()),
+		(N'KB в„–11761526', N'Р‘СЂР°С—Р»РєРѕ', N'РњР°СЂС–СЏ', N'Р†РіРѕСЂС–РІРЅР°', '20070912 00:00:00 AM', N'Рј. Р›СЊРІС–РІ', N'РІСѓР». РЁРµРІС‡РµРЅРєР°, Р±СѓРґ. 30, РєРІ. 10', @FemaleId, @SingleId, 23, @CurrentUserId, GETDATE()),
+		(N'PB в„–13349080', N'РљСЂР°СЃРёС†СЊРєРёР№', N'РћР»РµРєСЃР°РЅРґСЂ', N'Р“РµРЅРЅР°РґС–Р№РѕРІРёС‡', '20070621 00:00:00 AM', N'Рј. Р С–РІРЅРµ', N'РІСѓР». РЎРѕР±РѕСЂРЅР°, Р±СѓРґ. 250, РєРІ 42', @MaleId, @SingleId, 24, @CurrentUserId, GETDATE())
 
 	INSERT INTO [dbo].[Hobby] ([HobbyName], [CreatedBy], [CreatedDateTime])
 	VALUES 
@@ -50,14 +50,14 @@ BEGIN TRY
 
 	INSERT INTO [dbo].[StudentHobby] (StudentId, HobbyId, [CreatedBy], [CreatedDateTime])
 	VALUES 
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Reading'), @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Traveling'), @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Fishing'), @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Браїлко'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Traveling'), @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Браїлко'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Fishing'), @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Браїлко'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Crafting'), @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Красицький'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Crafting'), @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Красицький'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Television'), @CurrentUserId, GETDATE())
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р†С‰СѓРє'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Reading'), @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'РўРѕСЂРѕРєР°РЅРµС†СЊ'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Traveling'), @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'РўРѕСЂРѕРєР°РЅРµС†СЊ'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Fishing'), @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р‘СЂР°С—Р»РєРѕ'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Traveling'), @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р‘СЂР°С—Р»РєРѕ'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Fishing'), @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р‘СЂР°С—Р»РєРѕ'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Crafting'), @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'РљСЂР°СЃРёС†СЊРєРёР№'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Crafting'), @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'РљСЂР°СЃРёС†СЊРєРёР№'), (SELECT [HobbyId] FROM [dbo].[Hobby] WHERE [HobbyName] = 'Television'), @CurrentUserId, GETDATE())
 
 	INSERT INTO [dbo].[Book] ([Title], [Author], [Genre], [Isbn], [Price], [CreatedBy], [CreatedDateTime])
 	Values
@@ -83,51 +83,51 @@ BEGIN TRY
 
 	INSERT INTO [dbo].[LendedBook] ([StudentId], [BookId], [IsReturned], [CreatedBy], [CreatedDateTime])
 	VALUES
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 2), 0, @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 7), 0, @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 8), 0, @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 10), 0, @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Браїлко'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 5), 0, @CurrentUserId, GETDATE())
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р†С‰СѓРє'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 2), 0, @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р†С‰СѓРє'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 7), 0, @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'РўРѕСЂРѕРєР°РЅРµС†СЊ'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 8), 0, @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'РўРѕСЂРѕРєР°РЅРµС†СЊ'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 10), 0, @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р‘СЂР°С—Р»РєРѕ'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 5), 0, @CurrentUserId, GETDATE())
 	
 	DROP TABLE BookIds;
 
 	INSERT INTO [dbo].[AcademicDiscipline] ([DisciplineName], [CreatedBy], [CreatedDateTime])
 	VALUES
-		(N'Українська мова та література', @CurrentUserId, GETDATE()),
-		(N'Математика', @CurrentUserId, GETDATE()),
-		(N'Географія', @CurrentUserId, GETDATE())
+		(N'РЈРєСЂР°С—РЅСЃСЊРєР° РјРѕРІР° С‚Р° Р»С–С‚РµСЂР°С‚СѓСЂР°', @CurrentUserId, GETDATE()),
+		(N'РњР°С‚РµРјР°С‚РёРєР°', @CurrentUserId, GETDATE()),
+		(N'Р“РµРѕРіСЂР°С„С–СЏ', @CurrentUserId, GETDATE())
 
 	INSERT INTO [dbo].[Lecturer] ([LecturerName], [CreatedBy], [CreatedDateTime])
 	VALUES
-		(N'Володимир Вернадський', @CurrentUserId, GETDATE()),
-		(N'Григорій Сковорода', @CurrentUserId, GETDATE()),
-		(N'Леся Українка', @CurrentUserId, GETDATE())
+		(N'Р’РѕР»РѕРґРёРјРёСЂ Р’РµСЂРЅР°РґСЃСЊРєРёР№', @CurrentUserId, GETDATE()),
+		(N'Р“СЂРёРіРѕСЂС–Р№ РЎРєРѕРІРѕСЂРѕРґР°', @CurrentUserId, GETDATE()),
+		(N'Р›РµСЃСЏ РЈРєСЂР°С—РЅРєР°', @CurrentUserId, GETDATE())
 
 	INSERT INTO [dbo].[Group] ([GroupName], [GroupLeaderId], [CreatedBy], [CreatedDateTime])
 	VALUES
-		(N'ПІ-21', (SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), @CurrentUserId, GETDATE()),
-		(N'МК-11', NULL, @CurrentUserId, GETDATE())
+		(N'РџР†-21', (SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р†С‰СѓРє'), @CurrentUserId, GETDATE()),
+		(N'РњРљ-11', NULL, @CurrentUserId, GETDATE())
 
 	INSERT INTO [dbo].[GroupDiscipline] ([GroupId], [DisciplineId], [LecturerId], [CreatedBy], [CreatedDateTime])
 	VALUES
 		(
-			(SELECT [GroupId] FROM [dbo].[Group] WHERE [GroupName] = N'ПІ-21'),
-			(SELECT [AcademicDisciplineId] FROM [dbo].[AcademicDiscipline] WHERE [DisciplineName] = N'Українська мова та література'),
-			(SELECT [LecturerId] FROM [dbo].[Lecturer] WHERE [LecturerName] = N'Володимир Вернадський'),
+			(SELECT [GroupId] FROM [dbo].[Group] WHERE [GroupName] = N'РџР†-21'),
+			(SELECT [AcademicDisciplineId] FROM [dbo].[AcademicDiscipline] WHERE [DisciplineName] = N'РЈРєСЂР°С—РЅСЃСЊРєР° РјРѕРІР° С‚Р° Р»С–С‚РµСЂР°С‚СѓСЂР°'),
+			(SELECT [LecturerId] FROM [dbo].[Lecturer] WHERE [LecturerName] = N'Р’РѕР»РѕРґРёРјРёСЂ Р’РµСЂРЅР°РґСЃСЊРєРёР№'),
 			@CurrentUserId,
 			GETDATE()
 		),
 		(
-			(SELECT [GroupId] FROM [dbo].[Group] WHERE [GroupName] = N'ПІ-21'),
-			(SELECT [AcademicDisciplineId] FROM [dbo].[AcademicDiscipline] WHERE [DisciplineName] = N'Математика'),
-			(SELECT [LecturerId] FROM [dbo].Lecturer WHERE LecturerName = N'Григорій Сковорода'),
+			(SELECT [GroupId] FROM [dbo].[Group] WHERE [GroupName] = N'РџР†-21'),
+			(SELECT [AcademicDisciplineId] FROM [dbo].[AcademicDiscipline] WHERE [DisciplineName] = N'РњР°С‚РµРјР°С‚РёРєР°'),
+			(SELECT [LecturerId] FROM [dbo].Lecturer WHERE LecturerName = N'Р“СЂРёРіРѕСЂС–Р№ РЎРєРѕРІРѕСЂРѕРґР°'),
 			@CurrentUserId,
 			GETDATE()
 		),
 		(
-			(SELECT [GroupId] FROM [dbo].[Group] WHERE [GroupName] = N'МК-11'),
-			(SELECT [AcademicDisciplineId] FROM [dbo].[AcademicDiscipline] WHERE [DisciplineName] = N'Географія'),
-			(SELECT [LecturerId] FROM [dbo].Lecturer WHERE [LecturerName] = N'Леся Українка'),
+			(SELECT [GroupId] FROM [dbo].[Group] WHERE [GroupName] = N'РњРљ-11'),
+			(SELECT [AcademicDisciplineId] FROM [dbo].[AcademicDiscipline] WHERE [DisciplineName] = N'Р“РµРѕРіСЂР°С„С–СЏ'),
+			(SELECT [LecturerId] FROM [dbo].Lecturer WHERE [LecturerName] = N'Р›РµСЃСЏ РЈРєСЂР°С—РЅРєР°'),
 			@CurrentUserId,
 			GETDATE()
 		)
@@ -135,48 +135,48 @@ BEGIN TRY
 	INSERT INTO [dbo].[Grade] ([StudentId], [GroupDisciplineId], [Grade], [StateGrade], [CreatedBy], [CreatedDateTime])
 	VALUES
 		(
-			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
-			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Математика'),
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р†С‰СѓРє'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'РњР°С‚РµРјР°С‚РёРєР°'),
 			5,
 			0,
 			@CurrentUserId,
 			GETDATE()
 		),
 		(
-			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
-			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Математика'),
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р†С‰СѓРє'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'РњР°С‚РµРјР°С‚РёРєР°'),
 			4,
 			0,
 			@CurrentUserId,
 			GETDATE()
 		),
 		(
-			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
-			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Українська мова та література'),
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р†С‰СѓРє'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'РЈРєСЂР°С—РЅСЃСЊРєР° РјРѕРІР° С‚Р° Р»С–С‚РµСЂР°С‚СѓСЂР°'),
 			5,
 			0,
 			@CurrentUserId,
 			GETDATE()
 		),
 		(
-			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
-			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Математика'),
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'РўРѕСЂРѕРєР°РЅРµС†СЊ'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'РњР°С‚РµРјР°С‚РёРєР°'),
 			3,
 			0,
 			@CurrentUserId,
 			GETDATE()
 		),
 		(
-			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
-			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Українська мова та література'),
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'РўРѕСЂРѕРєР°РЅРµС†СЊ'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'РЈРєСЂР°С—РЅСЃСЊРєР° РјРѕРІР° С‚Р° Р»С–С‚РµСЂР°С‚СѓСЂР°'),
 			2,
 			0,
 			@CurrentUserId,
 			GETDATE()
 		),
 		(
-			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
-			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Українська мова та література'),
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'РўРѕСЂРѕРєР°РЅРµС†СЊ'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'РЈРєСЂР°С—РЅСЃСЊРєР° РјРѕРІР° С‚Р° Р»С–С‚РµСЂР°С‚СѓСЂР°'),
 			4,
 			0,
 			@CurrentUserId,
@@ -185,10 +185,10 @@ BEGIN TRY
 
 	INSERT INTO [dbo].[StudentRating] ([StudentId], [StudentRating], [StipendSumm],  [CreatedBy], [CreatedDateTime])
 	VALUES 
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 4.5, 1000, @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 4, 1000, @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Браїлко'), 5, 1500, @CurrentUserId, GETDATE()),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Красицький'), 3, 1000, @CurrentUserId, GETDATE())
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р†С‰СѓРє'), 4.5, 1000, @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'РўРѕСЂРѕРєР°РЅРµС†СЊ'), 4, 1000, @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Р‘СЂР°С—Р»РєРѕ'), 5, 1500, @CurrentUserId, GETDATE()),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'РљСЂР°СЃРёС†СЊРєРёР№'), 3, 1000, @CurrentUserId, GETDATE())
 
 	COMMIT TRANSACTION;
 END TRY
