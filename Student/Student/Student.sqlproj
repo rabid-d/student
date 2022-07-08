@@ -67,5 +67,6 @@
     <Build Include="GetStudentRatingQuery.sql" />
     <Build Include="GetStudentsBooksDebtQuery.sql" />
     <Build Include="GroupReportQuery.sql" />
+    <None Include="DifferentQueries.sql" />
   </ItemGroup>
 </Project>
