@@ -126,10 +126,25 @@ SELECT *
 FROM [dbo].[Student] AS [St]
 WHERE NOT EXISTS (SELECT * FROM [dbo].[LendedBook] WHERE [St].[StudentId] = [dbo].[LendedBook].StudentId)
 
-SELECT [StudentId], [FirstName]
+SELECT [St].[StudentId], [St].[FirstName]
 FROM [dbo].[Student] AS [St]
-WHERE 4 < ANY (SELECT [Grade] FROM [dbo].[Grade] WHERE [dbo].[Grade].[StudentId] = [St].[StudentId] AND [dbo].[Grade].[StateGrade] = 1)
+WHERE [St].[StudentId] = 
+	ANY (
+		SELECT [Gr].[StudentId]
+		FROM [dbo].[Grade] [Gr]
+		WHERE [Gr].[StudentId] = [St].[StudentId] AND [Gr].[Grade] >= 5
+		GROUP BY [Gr].[StudentId]
+		HAVING COUNT([Gr].[Grade]) >= 2
+	)
 
+SELECT [Bk1].[Title], [Bk1].[Price]
+FROM [dbo].[Book] AS [Bk1]
+WHERE [Price] = 
+	ALL (
+		SELECT [Bk].[Price]
+		FROM [dbo].[Book] [Bk]
+		WHERE [Bk].[Price] < 80
+	)
 
 -- SELECT з використанням підзапитів в секції HAVING.
 SELECT [FirstName], ROUND(AVG(Cast([Grade] as Float)), 2) AS 'Average grade'
