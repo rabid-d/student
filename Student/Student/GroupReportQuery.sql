@@ -1,27 +1,27 @@
-DECLARE @GroupName AS NVARCHAR(64) = N'ПІ-21'
+DECLARE @GroupName AS NVARCHAR(64) = N'РџР†-21'
 
 SELECT 
 	[FirstName] + ' ' + [LastName] + ' ' + [Middlename] as [PIB],
 	(SELECT COUNT(*)
 	FROM [dbo].[Student]
-	LEFT JOIN [dbo].[Grade] ON [dbo].[Student].[StudentId] = [dbo].[Grade].[StudentId]
-	WHERE [FirstName] = [st].[FirstName] AND [Grade] = 2) AS 'Незадовільно',
+	JOIN [dbo].[Grade] ON [dbo].[Student].[StudentId] = [dbo].[Grade].[StudentId]
+	WHERE [FirstName] = [st].[FirstName] AND [Grade] = 2) AS 'РќРµР·Р°РґРѕРІС–Р»СЊРЅРѕ',
 	(SELECT COUNT(*)
 	FROM [dbo].[Student]
-	LEFT JOIN [dbo].[Grade] ON [dbo].[Student].[StudentId] = [dbo].[Grade].[StudentId]
-	WHERE [FirstName] = [st].[FirstName] AND [Grade] = 3) AS 'Задовільно',
+	JOIN [dbo].[Grade] ON [dbo].[Student].[StudentId] = [dbo].[Grade].[StudentId]
+	WHERE [FirstName] = [st].[FirstName] AND [Grade] = 3) AS 'Р—Р°РґРѕРІС–Р»СЊРЅРѕ',
 	(SELECT COUNT(*)
 	FROM [dbo].[Student]
-	LEFT JOIN [dbo].[Grade] ON [dbo].[Student].[StudentId] = [dbo].[Grade].[StudentId]
-	WHERE [FirstName] = [st].[FirstName] AND [Grade] = 4) AS 'Добре',
+	JOIN [dbo].[Grade] ON [dbo].[Student].[StudentId] = [dbo].[Grade].[StudentId]
+	WHERE [FirstName] = [st].[FirstName] AND [Grade] = 4) AS 'Р”РѕР±СЂРµ',
 	(SELECT COUNT(*)
 	FROM [dbo].[Student]
-	LEFT JOIN [dbo].[Grade] ON [dbo].[Student].[StudentId] = [dbo].[Grade].[StudentId]
-	WHERE [FirstName] = [st].[FirstName] AND [Grade] = 5) AS 'Відмінно',
+	JOIN [dbo].[Grade] ON [dbo].[Student].[StudentId] = [dbo].[Grade].[StudentId]
+	WHERE [FirstName] = [st].[FirstName] AND [Grade] = 5) AS 'Р’С–РґРјС–РЅРЅРѕ',
 	(SELECT COUNT(*)
 	FROM [dbo].[Student]
-	LEFT JOIN [dbo].[Grade] ON [dbo].[Student].[StudentId] = [dbo].[Grade].[StudentId]
-	WHERE [FirstName] = [st].[FirstName]) AS 'Всього оцінок'
+	JOIN [dbo].[Grade] ON [dbo].[Student].[StudentId] = [dbo].[Grade].[StudentId]
+	WHERE [FirstName] = [st].[FirstName]) AS 'Р’СЃСЊРѕРіРѕ РѕС†С–РЅРѕРє'
 FROM [dbo].[Student] AS [st]
 RIGHT JOIN [dbo].[Group] ON [st].[CurrentGroupId] = [dbo].[Group].[GroupId]
 WHERE [GroupName] = @GroupName

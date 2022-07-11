@@ -3,7 +3,7 @@ DECLARE @RatingFrom AS FLOAT = 2.0
 DECLARE @RatingTo AS FLOAT = 4.4
 
 SELECT [FirstName], [LastName], [Middlename], [GroupName], [StudentRating], [AcademicTerm]
-FROM [dbo].[Student]
-RIGHT JOIN [dbo].[Group] ON [CurrentGroupId] = [GroupId]
-LEFT JOIN [dbo].[StudentRating] ON [dbo].[Student].[StudentId] = [dbo].[StudentRating].[StudentId]
-WHERE [GroupName] = @Group AND [StudentRating] BETWEEN @RatingFrom AND @RatingTo
+FROM [dbo].[Student] [St]
+JOIN [dbo].[Group] [Gr] ON [St].[CurrentGroupId] = [Gr].[GroupId] AND [Gr].[GroupName] = @Group
+JOIN [dbo].[StudentRating] [Sr] ON [St].[StudentId] = [Sr].[StudentId]
+WHERE [Sr].[StudentRating] BETWEEN @RatingFrom AND @RatingTo

@@ -5,7 +5,7 @@ DECLARE @IntervalTo1 AS DATETIME = '2021-12-31 00:00:00'
 DECLARE @IntervalFrom2 AS DATETIME = '2022-01-01 00:00:00'
 DECLARE @IntervalTo2 AS DATETIME = '2022-05-31 00:00:00'
 
-DECLARE @StudentFirstName AS NVARCHAR(128) = N'Тороканець'
+DECLARE @StudentFirstName AS NVARCHAR(128) = N'РўРѕСЂРѕРєР°РЅРµС†СЊ'
 
 SELECT 
 	[FirstName] + ' ' + [LastName] + ' ' + [Middlename] as [PIB],
