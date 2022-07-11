@@ -207,9 +207,11 @@ END
 IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'StudentRating')
 Begin
 	CREATE TABLE [dbo].[StudentRating] (
+		[StudentRatingId] UNIQUEIDENTIFIER NOT NULL,
 		[StudentId] UNIQUEIDENTIFIER NOT NULL,
 		[StudentRating] FLOAT NOT NULL,
 		[StipendSumm] MONEY NOT NULL,
+		[AcademicTerm] INT NOT NULL,
 		[ModifiedBy] UNIQUEIDENTIFIER NULL,
 		[ModifiedDateTime] DATETIME NULL,
 		[CreatedBy] UNIQUEIDENTIFIER NOT NULL,
@@ -220,7 +222,13 @@ END
 IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'PK_StudentRating')
 Begin
 	ALTER TABLE [dbo].[StudentRating]
-	ADD CONSTRAINT [PK_StudentRating] PRIMARY KEY ([StudentId])
+	ADD CONSTRAINT [PK_StudentRating] PRIMARY KEY ([StudentRatingId])
+END
+
+IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'DF_StudentRating_StudentRatingId')
+Begin
+	ALTER TABLE [dbo].[StudentRating]
+	ADD CONSTRAINT [DF_StudentRating_StudentRatingId] DEFAULT (NEWID()) FOR [StudentRatingId]
 END
 
 IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'FK_StudentRating_Student')
@@ -476,4 +484,12 @@ IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'FK_Grade_GroupDiscipline
 Begin
 	ALTER TABLE [dbo].[Grade]
 	ADD CONSTRAINT [FK_Grade_GroupDiscipline] FOREIGN KEY ([GroupDisciplineId]) REFERENCES [dbo].[GroupDiscipline] ([GroupDisciplineId])
+END
+
+
+
+IF EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'LendedBook')
+Begin
+	ALTER TABLE [dbo].[LendedBook]
+	ADD [ReturnDate] DATETIME NULL
 END
