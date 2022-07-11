@@ -485,3 +485,11 @@ Begin
 	ALTER TABLE [dbo].[Grade]
 	ADD CONSTRAINT [FK_Grade_GroupDiscipline] FOREIGN KEY ([GroupDisciplineId]) REFERENCES [dbo].[GroupDiscipline] ([GroupDisciplineId])
 END
+
+
+
+IF EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'LendedBook')
+Begin
+	ALTER TABLE [dbo].[LendedBook]
+	ADD [ReturnDate] DATETIME NULL
+END
