@@ -15,20 +15,9 @@ AS
     DECLARE @Id AS UNIQUEIDENTIFIER
     DECLARE @StipendSum AS INT
 
-    SELECT [StudentId] INTO #TempIds FROM [dbo].[Student]
-
-    WHILE EXISTS(SELECT * FROM #TempIds)
-    Begin
-        SELECT TOP 1 @Id = [StudentId] FROM #TempIds
-        DELETE #TempIds WHERE [StudentId] = @Id
-
-        EXEC @StipendSum = [dbo].[FnGetStipendAmount] @StudentId = @Id, @AcademicTerm = 1
-
-        INSERT INTO [dbo].[StipendTransfer] ([StudentId], [StipendAmount], [Year], [Month], [CreatedBy], [CreatedDateTime])
-        VALUES (@Id, @StipendSum, @Year, @Month, @CurrentUserId, @CurrentDate)
-    END
-
-    DROP TABLE #TempIds
+    INSERT INTO [dbo].[StipendTransfer] ([StudentId], [StipendAmount], [Year], [Month], [CreatedBy], [CreatedDateTime])
+    SELECT [St].[StudentId], [dbo].[FnGetStipendAmount]([St].[StudentId], 1), @Year, @Month, @CurrentUserId, @CurrentDate
+    FROM [dbo].[Student] [St]
 GO
 
 
