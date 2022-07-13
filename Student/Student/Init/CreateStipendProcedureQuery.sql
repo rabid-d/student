@@ -1,12 +1,8 @@
 USE UniversityDatabase
 GO
 
-IF OBJECT_ID ( 'dbo.SpTransferStipend', 'P' ) IS NOT NULL
-    DROP PROCEDURE [dbo].[SpTransferStipend];
-GO
-
 -- This procedure transfers stipend for a specified month to all students.
-CREATE PROCEDURE [dbo].[SpTransferStipend]
+CREATE OR ALTER PROCEDURE [dbo].[SpTransferStipend]
     @Year INT,
     @Month INT
 AS

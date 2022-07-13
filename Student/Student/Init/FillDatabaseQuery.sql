@@ -349,4 +349,4 @@ BEGIN CATCH
 		ERROR_LINE() AS ErrorLine, 
 		ERROR_MESSAGE() AS ErrorMessage;
 END CATCH
-GO;
+GO
