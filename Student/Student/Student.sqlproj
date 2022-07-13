@@ -63,5 +63,10 @@
   <ItemGroup>
     <Build Include="Init\CreateDatabaseQuery.sql" />
     <Build Include="Init\FillDatabaseQuery.sql" />
+    <Build Include="GetStudentsByGroupAndRatingQuery.sql" />
+    <Build Include="GetStudentRatingQuery.sql" />
+    <Build Include="GetStudentsBooksDebtQuery.sql" />
+    <Build Include="GroupReportQuery.sql" />
+    <None Include="DifferentQueries.sql" />
   </ItemGroup>
 </Project>

@@ -84,12 +84,12 @@ BEGIN TRY
 
 	INSERT INTO [dbo].[LendedBook] ([StudentId], [BookId], [IsReturned], [CreatedBy], [CreatedDateTime])
 	VALUES
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 2), 0, @CurrentUserId, @CurrentDate),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 7), 0, @CurrentUserId, @CurrentDate),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 8), 0, @CurrentUserId, @CurrentDate),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 10), 0, @CurrentUserId, @CurrentDate),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Браїлко'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 5), 0, @CurrentUserId, @CurrentDate)
-	
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 2), 0, @CurrentUserId, '2022-04-05 12:30:23'),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 7), 0, @CurrentUserId, '2021-08-01 16:48:58'),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 8), 0, @CurrentUserId, '2021-09-01 10:54:43'),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 10), 0, @CurrentUserId, '2021-09-01 10:54:55'),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Браїлко'), (SELECT [BookId] FROM [dbo].[BookIds] WHERE Row = 5), 0, @CurrentUserId, '2022-06-06 12:13:42')
+
 	DROP TABLE BookIds;
 
 	INSERT INTO [dbo].[AcademicDiscipline] ([DisciplineName], [CreatedBy], [CreatedDateTime])
@@ -108,6 +108,11 @@ BEGIN TRY
 	VALUES
 		(N'ПІ-21', (SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), @CurrentUserId, @CurrentDate),
 		(N'МК-11', NULL, @CurrentUserId, @CurrentDate)
+
+	UPDATE [dbo].[Student] SET [CurrentGroupId] = (SELECT [GroupId] FROM [dbo].[Group] WHERE [GroupName]= N'ПІ-21') WHERE [FirstName] = N'Іщук'
+	UPDATE [dbo].[Student] SET [CurrentGroupId] = (SELECT [GroupId] FROM [dbo].[Group] WHERE [GroupName]= N'ПІ-21') WHERE [FirstName] = N'Тороканець'
+	UPDATE [dbo].[Student] SET [CurrentGroupId] = (SELECT [GroupId] FROM [dbo].[Group] WHERE [GroupName]= N'МК-11') WHERE [FirstName] = N'Браїлко'
+	UPDATE [dbo].[Student] SET [CurrentGroupId] = (SELECT [GroupId] FROM [dbo].[Group] WHERE [GroupName]= N'МК-11') WHERE [FirstName] = N'Красицький'
 
 	INSERT INTO [dbo].[GroupDiscipline] ([GroupId], [DisciplineId], [LecturerId], [CreatedBy], [CreatedDateTime])
 	VALUES
@@ -141,7 +146,7 @@ BEGIN TRY
 			5,
 			0,
 			@CurrentUserId,
-			@CurrentDate
+			'2021-09-01 11:04:59'
 		),
 		(
 			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
@@ -149,7 +154,39 @@ BEGIN TRY
 			4,
 			0,
 			@CurrentUserId,
-			@CurrentDate
+			'2021-10-11 15:25:31'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Математика'),
+			4,
+			1,
+			@CurrentUserId,
+			'2021-12-09 09:25:12'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Математика'),
+			3,
+			0,
+			@CurrentUserId,
+			'2022-01-20 15:13:41'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Математика'),
+			4,
+			0,
+			@CurrentUserId,
+			'2022-03-11 11:43:52'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Математика'),
+			4,
+			1,
+			@CurrentUserId,
+			'2022-05-03 10:16:22'
 		),
 		(
 			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
@@ -157,7 +194,39 @@ BEGIN TRY
 			5,
 			0,
 			@CurrentUserId,
-			@CurrentDate
+			'2021-09-16 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Українська мова та література'),
+			2,
+			0,
+			@CurrentUserId,
+			'2021-10-15 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Українська мова та література'),
+			3,
+			1,
+			@CurrentUserId,
+			'2021-12-15 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Українська мова та література'),
+			4,
+			0,
+			@CurrentUserId,
+			'2022-01-16 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Українська мова та література'),
+			4,
+			1,
+			@CurrentUserId,
+			'2022-03-15 12:12:55'
 		),
 		(
 			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
@@ -165,7 +234,47 @@ BEGIN TRY
 			3,
 			0,
 			@CurrentUserId,
-			@CurrentDate
+			'2021-09-16 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Математика'),
+			3,
+			0,
+			@CurrentUserId,
+			'2021-10-16 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Математика'),
+			3,
+			1,
+			@CurrentUserId,
+			'2021-12-16 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Математика'),
+			3,
+			0,
+			@CurrentUserId,
+			'2022-01-16 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Математика'),
+			3,
+			0,
+			@CurrentUserId,
+			'2022-02-16 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Математика'),
+			4,
+			1,
+			@CurrentUserId,
+			'2022-05-16 12:12:55'
 		),
 		(
 			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
@@ -173,7 +282,7 @@ BEGIN TRY
 			2,
 			0,
 			@CurrentUserId,
-			@CurrentDate
+			'2021-09-16 12:12:55'
 		),
 		(
 			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
@@ -181,15 +290,51 @@ BEGIN TRY
 			4,
 			0,
 			@CurrentUserId,
-			@CurrentDate
+			'2021-10-16 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Українська мова та література'),
+			4,
+			1,
+			@CurrentUserId,
+			'2021-12-16 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Українська мова та література'),
+			3,
+			0,
+			@CurrentUserId,
+			'2022-01-16 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Українська мова та література'),
+			4,
+			0,
+			@CurrentUserId,
+			'2022-03-16 12:12:55'
+		),
+		(
+			(SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 
+			(SELECT [GroupDisciplineId] FROM [GroupDiscipline] JOIN [AcademicDiscipline] ON [DisciplineId] = [AcademicDisciplineId] WHERE [DisciplineName] = N'Українська мова та література'),
+			5,
+			1,
+			@CurrentUserId,
+			'2022-04-16 12:12:55'
 		)
 
-	INSERT INTO [dbo].[StudentRating] ([StudentId], [StudentRating], [StipendSumm],  [CreatedBy], [CreatedDateTime])
+	INSERT INTO [dbo].[StudentRating] ([StudentId], [StudentRating], [StipendSumm], [AcademicTerm], [CreatedBy], [CreatedDateTime])
 	VALUES 
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 4.5, 1000, @CurrentUserId, @CurrentDate),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 4, 1000, @CurrentUserId, @CurrentDate),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Браїлко'), 5, 1500, @CurrentUserId, @CurrentDate),
-		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Красицький'), 3, 1000, @CurrentUserId, @CurrentDate)
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 3.5, 0, 1, @CurrentUserId, @CurrentDate),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Іщук'), 4, 1000, 2, @CurrentUserId, @CurrentDate),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 3.5, 0, 1, @CurrentUserId, @CurrentDate),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Тороканець'), 4.5, 1000, 2,  @CurrentUserId, @CurrentDate),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Браїлко'), 5, 1500, 1, @CurrentUserId, @CurrentDate),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Браїлко'), 5, 1500, 2, @CurrentUserId, @CurrentDate),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Красицький'), 4.1, 1000, 1, @CurrentUserId, @CurrentDate),
+		((SELECT [StudentId] FROM [dbo].[Student] WHERE [FirstName] = N'Красицький'), 4.4, 1000, 2, @CurrentUserId, @CurrentDate)
 
 	COMMIT TRANSACTION;
 END TRY
@@ -204,4 +349,4 @@ BEGIN CATCH
 		ERROR_LINE() AS ErrorLine, 
 		ERROR_MESSAGE() AS ErrorMessage;
 END CATCH
-Go;
+GO

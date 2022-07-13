@@ -207,9 +207,11 @@ END
 IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'StudentRating')
 Begin
 	CREATE TABLE [dbo].[StudentRating] (
+		[StudentRatingId] UNIQUEIDENTIFIER NOT NULL,
 		[StudentId] UNIQUEIDENTIFIER NOT NULL,
 		[StudentRating] FLOAT NOT NULL,
 		[StipendSumm] MONEY NOT NULL,
+		[AcademicTerm] INT NOT NULL,
 		[ModifiedBy] UNIQUEIDENTIFIER NULL,
 		[ModifiedDateTime] DATETIME NULL,
 		[CreatedBy] UNIQUEIDENTIFIER NOT NULL,
@@ -220,7 +222,13 @@ END
 IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'PK_StudentRating')
 Begin
 	ALTER TABLE [dbo].[StudentRating]
-	ADD CONSTRAINT [PK_StudentRating] PRIMARY KEY ([StudentId])
+	ADD CONSTRAINT [PK_StudentRating] PRIMARY KEY ([StudentRatingId])
+END
+
+IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'DF_StudentRating_StudentRatingId')
+Begin
+	ALTER TABLE [dbo].[StudentRating]
+	ADD CONSTRAINT [DF_StudentRating_StudentRatingId] DEFAULT (NEWID()) FOR [StudentRatingId]
 END
 
 IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'FK_StudentRating_Student')
@@ -476,4 +484,40 @@ IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'FK_Grade_GroupDiscipline
 Begin
 	ALTER TABLE [dbo].[Grade]
 	ADD CONSTRAINT [FK_Grade_GroupDiscipline] FOREIGN KEY ([GroupDisciplineId]) REFERENCES [dbo].[GroupDiscipline] ([GroupDisciplineId])
+END
+
+
+
+IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'StipendTransfer')
+Begin
+	CREATE TABLE [dbo].[StipendTransfer] (
+		[StipendTransferId] UNIQUEIDENTIFIER NOT NULL,
+		[StudentId] UNIQUEIDENTIFIER NOT NULL,
+		[StipendAmount] INT NOT NULL,
+		[Year] INT NOT NULL,
+		[Month] INT NOT NULL,
+
+		[ModifiedBy] UNIQUEIDENTIFIER NULL,
+		[ModifiedDateTime] DATETIME NULL,
+		[CreatedBy] UNIQUEIDENTIFIER NOT NULL,
+		[CreatedDateTime] DATETIME NOT NULL,
+	)
+END
+
+IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'PK_StipendTransfer')
+Begin
+	ALTER TABLE [dbo].[StipendTransfer]
+	ADD CONSTRAINT [PK_StipendTransfer] PRIMARY KEY ([StipendTransferId])
+END
+
+IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = 'DF_StipendTransfer_StipendTransferId')
+Begin
+	ALTER TABLE [dbo].[StipendTransfer]
+	ADD CONSTRAINT [DF_StipendTransfer_StipendTransferId] DEFAULT (NEWID()) FOR [StipendTransferId]
+END
+
+IF NOT EXISTS(SELECT * FROM SYS.OBJECTS WHERE [Name] = '[FK_StipendTransfer_Student]')
+Begin
+	ALTER TABLE [dbo].[StipendTransfer]
+	ADD CONSTRAINT [FK_StipendTransfer_Student] FOREIGN KEY ([StudentId]) REFERENCES [dbo].[Student] ([StudentId])
 END
