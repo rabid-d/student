@@ -1,5 +1,6 @@
-﻿using System.Data.SqlClient;
-using static System.Linq.Enumerable;
+﻿using StudentConsoleAdoApp;
+using System.Data.SqlClient;
+using System.Data;
 
 var connetionString = "Server=localhost;Database=UniversityDatabase;Integrated Security=SSPI;";
 var cnn = new SqlConnection(connetionString);
@@ -13,8 +14,19 @@ try
     using (var cmd = new SqlCommand(getStudentsByGroupSql, cnn))
     {
         SqlDataReader reader = cmd.ExecuteReader();
+
+        var allStudents = new List<StudentCard>();
+        while (reader.Read())
+        {
+            allStudents.Add(ParseStudentCard(reader));
+        }
+
         Console.WriteLine("List of students in ПІ-21 group:");
-        WriteToConsole(reader);
+        foreach (var student in allStudents)
+        {
+            WriteStudentToConsole(student);
+            Console.WriteLine();
+        }
         reader.Close();
     }
 
@@ -26,9 +38,33 @@ try
     using (var cmd = new SqlCommand(getStudentAndGradesSql, cnn))
     {
         SqlDataReader reader = cmd.ExecuteReader();
+        var studentsAndGrades = new List<Tuple<StudentCard, Tuple<int, DateTime>>>();
+        while (reader.Read())
+        {
+            var student = ParseStudentCard(reader);
+            var grade = reader.GetInt32(5);
+            var dateOfGrade = reader.GetDateTime(6);
+            studentsAndGrades.Add(Tuple.Create(student, Tuple.Create(grade, dateOfGrade)));
+        }
+
         Console.WriteLine("All grades of student Іщук:");
-        WriteToConsole(reader);
+        foreach (var studentAndGrade in studentsAndGrades)
+        {
+            WriteStudentToConsole(studentAndGrade.Item1);
+            Console.Write($"{studentAndGrade.Item2.Item1, -15}");
+            Console.Write($"{studentAndGrade.Item2.Item2, -15}");
+            Console.WriteLine();
+        }
         reader.Close();
+    }
+
+    var procedureName = "SpTransferStipend";
+    using (var cmd = new SqlCommand(procedureName, cnn))
+    {
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@Year", 2022);
+        cmd.Parameters.AddWithValue("@Month", 1);
+        cmd.ExecuteNonQuery();
     }
     cnn.Close();
 }
@@ -38,15 +74,23 @@ catch (Exception ex)
     Console.WriteLine(ex.StackTrace);
 }
 
-void WriteToConsole(SqlDataReader reader)
+void WriteStudentToConsole(StudentCard student)
 {
-    while (reader.Read())
+    Console.Write($"{student.CardNumber, -15}");
+    Console.Write($"{student.FirstName, -15}");
+    Console.Write($"{student.LastName, -15}");
+    Console.Write($"{student.MiddleName, -15}");
+    Console.Write($"{student.GroupName, -15}");
+}
+
+StudentCard ParseStudentCard(SqlDataReader reader)
+{
+    return new StudentCard()
     {
-        foreach (var i in Range(0, reader.FieldCount))
-        {
-            Console.Write($"{reader.GetValue(i), -15}");
-        }
-        Console.WriteLine();
-    }
-    Console.WriteLine();
+        CardNumber = reader.GetString(0),
+        FirstName = reader.GetString(1),
+        LastName = reader.GetString(2),
+        MiddleName = reader.GetString(3),
+        GroupName = reader.GetString(4),
+    };
 }
